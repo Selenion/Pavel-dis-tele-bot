@@ -1,5 +1,5 @@
 # **Pavel-dis-tele-bot**
-A bot that helps to transfer messages with some preconfigured prefix to the telegram channel
+A bot that helps to transfer messages with some preconfigured prefix from Discord to the telegram channel
 
 To use the bot you have to preconfigure it before start:
 
