@@ -26,6 +26,10 @@ func main() {
 	if discordToken == "" {
 		panic(fmt.Errorf("cannot find discordoken"))
 	}
+	msgPrefix := viper.GetString("prefix")
+	if msgPrefix == "" {
+		panic(fmt.Errorf("cannot find string prefix"))
+	}
 
 	messages := make(chan string)
 	go util.TeleConnect(telegramToken, messages, telegramChannel)
@@ -33,6 +37,6 @@ func main() {
 	/*	if err != nil {
 		panic(fmt.Errorf("fatal error accessing telegram bot: %w", err))
 	}*/
-	util.DiscInit(discordToken, messages)
+	util.DiscInit(discordToken, messages, msgPrefix)
 
 }

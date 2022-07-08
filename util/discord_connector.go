@@ -11,9 +11,14 @@ import (
 )
 
 var messagesChan chan string
+var prefix string
 
-func DiscInit(token string, messages chan string) {
+func DiscInit(token string, messages chan string, pr string) {
 	messagesChan = messages
+	prefix = pr
+
+	log.Println("Watcher prefix is", prefix)
+
 	discbot, err := discordgo.New("Bot " + token)
 	if err != nil {
 		log.Println("Error creating Discord session: ", err)
@@ -49,7 +54,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	log.Println("Входящее сообщение из Discord: ", m.Content)
 
-	if strings.HasPrefix(m.Content, "@Ждун") {
+	if strings.HasPrefix(m.Content, prefix) {
 		messagesChan <- m.Content
 	}
 }
