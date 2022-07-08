@@ -4,7 +4,7 @@ import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
 import "log"
 
-func TeleConnect(token string, messages chan string) {
+func TeleConnect(token string, messages chan string, telegramChannel int64) {
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
 		log.Panic(err)
@@ -17,7 +17,17 @@ func TeleConnect(token string, messages chan string) {
 	for {
 		select {
 		case msg := <-messages:
-			teleSend(msg)
+			{
+				if msg == "" {
+					log.Printf("Получено пустое сообщение")
+					continue
+				}
+				telemsg := tgbotapi.NewMessage(telegramChannel, msg)
+				_, err := bot.Send(telemsg)
+				if err != nil {
+					log.Printf("Ошибка при отправке сообщения: %s", err)
+				}
+			}
 		}
 	}
 	/*	u := tgbotapi.NewUpdate(0)
@@ -37,8 +47,4 @@ func TeleConnect(token string, messages chan string) {
 		}
 	*/
 	//return *bot, err
-}
-
-func teleSend(msg string) {
-	//TODO Make a send fuction
 }
