@@ -1,0 +1,6 @@
+{
+  "telegram_token" : "place_your_telegram_bot_token_here",
+  "telegram_chat_id" : "place_the_id_of_telegram_channel",
+  "discord_token" : "place_your_discord_bot_token",
+  "prefix" : "define_the_prefix"
+}
